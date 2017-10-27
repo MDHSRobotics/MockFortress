@@ -3,7 +3,7 @@ package org.usfirst.frc.team4141.robot;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
-import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
+//import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
@@ -12,6 +12,8 @@ import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
+import org.usfirst.frc.team4141.robot.subsystems.ScissorLiftSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 import com.ctre.CANTalon;
 
@@ -56,21 +58,35 @@ public class Robot extends MDRobotBase {
 		//uncomment the desired drive system and adjust the motor configuration as needed
 		//Mecanum example :
 		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-				.add("accelerometer", new MD_BuiltInAccelerometer())
-				.add("IMU", new MD_IMU())
-				.add(MotorPosition.frontLeft, new CANTalon(1))
-				.add(MotorPosition.frontRight, new CANTalon(2))
-				.add(MotorPosition.rearLeft, new CANTalon(5))
-				.add(MotorPosition.rearRight, new CANTalon(6))
-				.add("Drive-F", new DoubleConfigSetting(0.0, 1.0, 0.0))
-		 	    .add("Drive-P", new DoubleConfigSetting(0.0, 1.0, 0.1))
-				.add("Drive-I", new DoubleConfigSetting(0.0, 1.0, 0.8))
-				.add("Drive-D", new DoubleConfigSetting(0.0, 1.0, 0.1))
+//				.add("accelerometer", new MD_BuiltInAccelerometer())
+			//	.add("IMU", new MD_IMU())
+				.add(MotorPosition.left, new Victor(0))
+				.add(MotorPosition.right, new Victor(1))
+//				.add(MotorPosition.rearLeft, new Victor(3))
+//				.add(MotorPosition.rearRight, new Victor(4))
+//				.add("Drive-F", new DoubleConfigSetting(0.0, 1.0, 0.0))
+//		 	    .add("Drive-P", new DoubleConfigSetting(0.0, 1.0, 0.1))
+//				.add("Drive-I", new DoubleConfigSetting(0.0, 1.0, 0.8))
+//				.add("Drive-D", new DoubleConfigSetting(0.0, 1.0, 0.1))
 				.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25)) //High Speed - Turn Factor
 		 	    .add("b", new DoubleConfigSetting(0.0, 1.0, 0.4)) //Slow Speed - Turn Factor
 				.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0)) //Speed Governor
 				.configure()
 		);	
+		
+		add(new ShootSubsystem(this, "shootSubsystem")
+				.add(ShootSubsystem.motorName, new Victor(2))
+				.add(ShootSubsystem.motorName1, new Victor(3))
+				.add("shootSpeed", new DoubleConfigSetting(0.0, 1.0, 0.78))
+				.configure()
+				);
+		
+		
+		add(new ScissorLiftSubsystem(this, "scissorLiftSubsystem")
+				.add(ScissorLiftSubsystem.motorName, new Victor(4))
+				.add("liftSpeed", new DoubleConfigSetting(0.0, 1.0, 0.78))
+				.configure()
+				);
 		
 		//TankDrive with 2 motors example:
 //		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
@@ -94,7 +110,42 @@ public class Robot extends MDRobotBase {
 
 	}
 
-
+	/**
+	 * This method runs when teleop is enabled for the first time.
+	 * This basally starts the ArcadeCommand once enabled.
+	 */
+	@Override
+	public void teleopInit() {
+		super.teleopInit();   //ArcadeCommand started in super.teleopInit();	
+	} 
+	
+	/**
+	 * This method runs when autonomous is enabled for the first time.
+	 * This basally starts the autonomousCommand once enabled.
+	 */
+	@Override
+	public void autonomousInit() { 
+		super.autonomousInit();
+	} 	
+	
+	/**
+	 * This method runs repeatably when disabledPeriodic is enabled.
+	 * This basally disables the term Periodic from being used in a method
+	 * once enabled.
+	 */
+	@Override
+	public void disabledPeriodic() {
+		super.disabledPeriodic();
+	}
+	
+	/**
+	 * This method runs when robot is enabled for the first time.
+	 * This basally boots up when the robot itself does, and gets
+	 * its classes ready to go.
+	 */
+	@Override
+	public void robotInit() {
+		super.robotInit();
 
 	
 	//Override lifecycle methods, as needed
@@ -117,5 +168,5 @@ public class Robot extends MDRobotBase {
 	//		super.onConnect(session);
 	//		...
 	//	}
-		
+	}		
 }

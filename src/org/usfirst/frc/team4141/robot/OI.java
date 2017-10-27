@@ -6,9 +6,13 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.MDRobotBase.RioHID;
+import org.usfirst.frc.team4141.robot.commands.LowerCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+import org.usfirst.frc.team4141.robot.commands.RecallCommand;
+import org.usfirst.frc.team4141.robot.commands.RiseCommand;
+import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 
 
 /**
@@ -40,11 +44,11 @@ public class OI extends OIBase{
 			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
 			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
 		    //the following commands are test move commands useful in testing drive configuration and set up
-		    //comment out and replace as needed
-			.whenPressed("X",1,new MDMoveCommand(getRobot(),"left command",Direction.left))
-			.whenPressed("A",2,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
-			.whenPressed("B",3,new MDMoveCommand(getRobot(),"right command",Direction.right))
-			.whenPressed("Y",4,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+		    //comment out and replace as neede0d
+			.whileHeld("X",3,new RiseCommand(getRobot(),"rise command"))
+			.whileHeld("A",1,new ShootCommand(getRobot(),"shoot command"))
+			.whileHeld("B",2,new LowerCommand(getRobot(),"lower command"))
+			.whileHeld("Y",4,new RecallCommand(getRobot(),"recall command"))
 			.configure()
 		);
 

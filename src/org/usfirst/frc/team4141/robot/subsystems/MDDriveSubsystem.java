@@ -172,14 +172,14 @@ public class MDDriveSubsystem extends MDSubsystem {
 //			}	
 //			leftShiftSolenoid=(Solenoid) getSolenoids().get(leftShiftSolenoidName);
 //			
-			if(getSensors()==null && !getSensors().containsKey("IMU")){
-				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing IMU.");
-			}
-		    imu=(MD_IMU) getSensors().get("IMU");
-		    gyroReset();
-		    if(getSensors()==null && !getSensors().containsKey("High Gear")){
-				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing Gear Shift Sensors.");
-			}
+//			if(getSensors()==null && !getSensors().containsKey("IMU")){
+//				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing IMU.");
+//			}
+//		    imu=(MD_IMU) getSensors().get("IMU");
+//		    gyroReset();
+//		    if(getSensors()==null && !getSensors().containsKey("High Gear")){
+//				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing Gear Shift Sensors.");
+//			}
 			
 			
 			break;

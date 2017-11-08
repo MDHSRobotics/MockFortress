@@ -3,7 +3,9 @@ package org.usfirst.frc.team4141.robot.subsystems;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.AnalogSensorReading;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
@@ -12,12 +14,21 @@ import edu.wpi.first.wpilibj.SpeedController;
  * lower the robot on a rope.
  */
 public class ShootSubsystem extends MDSubsystem {
+	boolean haveBall = false;
+	
+	public void setHasBall(boolean hasBall){
+		haveBall= hasBall;
+	}
+	public boolean hasBall(){
+		return haveBall || hasBallSensor.get();
+	}
 	
 	private double shootSpeed=0.75;
 	private SpeedController shootController1;
 	private SpeedController shootController2;
 	public static String motorName="shootMotor1";
 	public static String motorName1="shootMotor2";
+	public DigitalInput hasBallSensor ;
 	
 	// ------------------------------------------------ //
 	
@@ -59,9 +70,14 @@ public class ShootSubsystem extends MDSubsystem {
 	 * This calls the variable ropeController to go in a positive direction
 	 * which raises the robot up the rope.
 	 */
+//	public boolean hasBall(){
+//	double gearDistance = ((DigitslSensorReading) (AnalogSensorReading()).getValue();
+//	return gearDistance>gearDetectSetting;
+//}
 	public void shoot(){
 		//positive speed=wind
 		//negative speed=unwind
+		haveBall = false;
 		shootController1.set(shootSpeed);
 		shootController2.set(-shootSpeed);
 	}

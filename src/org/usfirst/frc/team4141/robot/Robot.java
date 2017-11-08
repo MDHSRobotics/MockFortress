@@ -2,6 +2,8 @@ package org.usfirst.frc.team4141.robot;
 
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.AnalogSensorReading;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.DigitalSensorReading;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 //import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
@@ -77,6 +79,7 @@ public class Robot extends MDRobotBase {
 		add(new ShootSubsystem(this, "shootSubsystem")
 				.add(ShootSubsystem.motorName, new Victor(2))
 				.add(ShootSubsystem.motorName1, new Victor(3))
+//				.add("hasBallSensor", new DigitalSensorReading(1, "hasBallSensor", false))
 				.add("shootSpeed", new DoubleConfigSetting(0.0, 1.0, 0.78))
 				.configure()
 				);
